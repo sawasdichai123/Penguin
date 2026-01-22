@@ -1,0 +1,271 @@
+.penguin-container {
+    position: relative;
+    width: 200px;
+    height: 220px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.penguin {
+    position: relative;
+    width: 140px;
+    height: 160px;
+    z-index: 2;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.penguin.happy {
+    animation: bounce 2s infinite ease-in-out;
+}
+
+.penguin.sad {
+    filter: grayscale(0.6);
+    transform: scale(0.95);
+}
+
+/* Body */
+.penguin-body {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #2c3e50;
+    border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
+    overflow: hidden;
+    /* Clips the belly */
+    z-index: 2;
+}
+
+.penguin-belly {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 75%;
+    height: 70%;
+    background: white;
+    border-radius: 50% 50% 40% 40% / 70% 70% 40% 40%;
+}
+
+/* Face */
+.face {
+    position: absolute;
+    top: 30px;
+    width: 100%;
+    height: 50px;
+    z-index: 3;
+}
+
+.eye {
+    position: absolute;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.eye.left {
+    left: 35px;
+}
+
+.eye.right {
+    right: 35px;
+}
+
+.pupil {
+    width: 10px;
+    height: 10px;
+    background: black;
+    border-radius: 50%;
+    animation: blink 4s infinite;
+}
+
+.penguin.sleeping .eye {
+    height: 4px;
+    width: 25px;
+    border-radius: 2px;
+    top: 10px;
+    background: transparent;
+    border-bottom: 3px solid #000;
+}
+
+.beak {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 15px;
+    background: #ffb74d;
+    border-radius: 50% 50% 50% 50% / 30% 30% 70% 70%;
+}
+
+.blush {
+    position: absolute;
+    top: 25px;
+    width: 15px;
+    height: 8px;
+    background: #e57373;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.blush.visible {
+    opacity: 0.6;
+}
+
+.blush.left {
+    left: 25px;
+}
+
+.blush.right {
+    right: 25px;
+}
+
+/* Limbs */
+.wing {
+    position: absolute;
+    top: 60px;
+    width: 40px;
+    height: 70px;
+    background: #2c3e50;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.wing.left {
+    left: -15px;
+    transform: rotate(20deg);
+    transform-origin: top right;
+}
+
+.wing.right {
+    right: -15px;
+    transform: rotate(-20deg);
+    transform-origin: top left;
+}
+
+.penguin.happy .wing.left {
+    animation: flapLeft 0.5s infinite alternate;
+}
+
+.penguin.happy .wing.right {
+    animation: flapRight 0.5s infinite alternate;
+}
+
+.foot {
+    position: absolute;
+    bottom: -10px;
+    width: 40px;
+    height: 20px;
+    background: #ffb74d;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.foot.left {
+    left: 30px;
+    transform: rotate(-10deg);
+}
+
+.foot.right {
+    right: 30px;
+    transform: rotate(10deg);
+}
+
+.shadow {
+    position: absolute;
+    bottom: -20px;
+    width: 120px;
+    height: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    z-index: 0;
+}
+
+/* Animations */
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    48%,
+    52%,
+    100% {
+        transform: scaleY(1);
+    }
+
+    50% {
+        transform: scaleY(0.1);
+    }
+}
+
+@keyframes flapLeft {
+    to {
+        transform: rotate(40deg);
+    }
+}
+
+@keyframes flapRight {
+    to {
+        transform: rotate(-40deg);
+    }
+}
+
+/* Status Icons */
+.status-icon {
+    position: absolute;
+    top: -40px;
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-sleep {
+    animation: floatUp 2s infinite ease-in;
+    opacity: 0;
+}
+
+.icon-heart {
+    animation: beat 1s infinite alternate;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(10px) translateX(0);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-20px) translateX(10px);
+        opacity: 0;
+    }
+}
+
+@keyframes beat {
+    to {
+        transform: scale(1.1);
+    }
+}
